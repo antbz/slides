@@ -171,6 +171,8 @@ cout << "Your input: " << input << endl;
 
 ---
 
+# Ex2 - Input
+
 ## Solução 
 
 ```C++
@@ -226,7 +228,7 @@ Existem bibliotecas que acrescentam outros tipos de dados, como ***strings*** ou
 - Para obter informação da consola é utilizando o stream `cin`.
 - Este objeto extraí a informação obtida para a variável que é fornecida ao operador de extração `>>`.
 - O programa para a execução enquanto espera pela input do utilizador.
-- Por defeito, a extração acontece quando o utilizador prime *enter*.
+- Por defeito, a extração acontece quando o stream contém um caratér de espaço branco (newline, espaço, tab, etc).
 - Se o stream estiver vazio, a extração não acontece e o programa continua à espera.
 - Se o stream contiver dados incompatíveis com o tipo de variável, os dados não são extraídos mas a execução continua.
 
@@ -260,44 +262,102 @@ int main() {
 
 ---
 
+# Input
 
+Para além do stream `cin` é também comum utilizar a função `getline()`.
+- `getline()` obtém uma linha como uma string.
+- Ao contrário de `cin`, o delimitador de extração é apenas o caratér de newline, e não qualquer espaço branco.
+- Assim, é possível extrair informação que contenha espaços, por exemplo.
+- É importante ***não misturar*** a utilização dos dois métodos.
+    - Ao obter informação diretamente de `cin`, o caratér de delimitação não é retirado do stream.
+    - Assim, se o delimitador fosse um '\n', ao utilizar `getline()` obteríamos uma string vazia.
+
+Veremos casos de utilzação desta função mais à frente.
+
+---
+
+# Ex3 - Soma
+
+Vamos acrescentar a funcionalidade de somar dois números à nossa aplicação. Tendo por base o código do último exercício:
+- Declarar mais uma variável e pedir input ao utilizador novamente para obter o seu valor.
+- Ao invés de no final mostrar na consola as inputs, somar o valor das duas variáveis e mostrar:
+```C++
+int sum = num1 + num2;
+```
+
+---
+
+# Ex3 - Soma
+
+## Solução
+
+```C++
+int main() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
+
+    cout << "Please input an integer number: ";
+    int num1;
+    cin >> num1;
+    
+    cout << "Please input an integer number: ";
+    int num2;
+    cin >> num2;
+
+    int sum = num1 + num2;
+
+    cout << "Sum: " << sum << endl;
+
+    return 0;
+}
+```
 
 ---
 
 # Operadores
-## Operadores de igualdade
-- **==** verdadeiro se ambos os operandos forem iguais
-- **!=** verdadeiro se ambos os operandos forem diferentes
-- **>** verdadeiro se operando da esquerda for maior que o da direita
-- **<** verdadeiro se operando da esquerda for menor que o da direita
-- **>=** verdadeiro se operando da esquerda for maior ou igual que o da direita
-- **<=** verdadeiro se operando da esquerda for menor ou igual que o da direita
 
----
-# Operadores
 ## Operadores Aritméticos
-- **+** adição
-- **-** subtração
-- ***** multiplicação
-- **/** divisão
-- **%** módulo
-- **++** incremento de 1 unidade
-- **--** decremento de 1 unidade
+- **+** - adição
+- **-** - subtração
+- **\*** - multiplicação
+- **/** - divisão*
+- **%** - módulo (resto da divisão inteira)
+
+\* Nota: O tipo retornado pela divisão depende do tipo dos operandos. Se ambos forem do tipo inteiro, a divisão terá um resultado inteiro também:
+```C++
+int a = 3;
+int b = a / 2; // = 1
+int c = a / 2.0 // = 1.5
+```
+
+---
+
+# Operadores
+
+## Operadores de igualdade
+- **==** - verdadeiro se ambos os operandos forem iguais
+- **!=** - verdadeiro se ambos os operandos forem diferentes
+- **>** - verdadeiro se operando da esquerda for maior que o da direita
+- **<** - verdadeiro se operando da esquerda for menor que o da direita
+- **>=** - verdadeiro se operando da esquerda for maior ou igual que o da direita
+- **<=** - verdadeiro se operando da esquerda for menor ou igual que o da direita
 
 ## Operadores lógicos
-- **&&** E lógico
-- **||** OU lógico 
-- **!** NÃO lógico (negação)
+- **&&** - E lógico
+- **||** - OU lógico 
+- **!** - NÃO lógico (negação)
 
 ---
 
 # Operadores
 ## Alguns operadores de atribuição
-- **=** operando da esquerda fica com o valor do da direita
-- **+=** operando da esquerda fica com o valor do da direita somado com o seu próprio valor
-- **-=** operando da esquerda fica com o valor do da direita subtraído com o seu próprio valor
-- ***=** operando da esquerda fica com o valor do da direita multiplicado com o seu próprio valor
-- **/=** operando da esquerda fica com o valor do da direita dividido com o seu próprio valor
+- **=** - operando da esquerda fica com o valor do da direita
+- **+=** - operando da esquerda fica com o valor do da direita somado com o seu próprio valor
+- **-=** - operando da esquerda fica com o valor do da direita subtraído com o seu próprio valor
+- ***=** - operando da esquerda fica com o valor do da direita multiplicado com o seu próprio valor
+- **/=** - operando da esquerda fica com o valor do da direita dividido com o seu próprio valor
+- **++** - incremento de 1 unidade
+- **--** - decremento de 1 unidade
 
 ---
 
