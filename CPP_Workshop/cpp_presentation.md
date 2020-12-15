@@ -15,9 +15,9 @@ class: center, middle
 
 # Pré-requisitos
 
-Este workshop dá como adquiridos alguns conceitos mais elementares de programação. Mais concretamente, foi concebido para programadores que têm como base conhecimento de Python 3.
+Este workshop dá como adquiridos alguns conceitos mais elementares de programação. Foi concebido para programadores que têm como base conhecimento de Python 3.
 
-Assim sendo, os detalhes que são comuns às duas linguagens (C++/Python3) não serão explorados com tanto detalhe como os específicos de C++.
+Os detalhes que são comuns às duas linguagens (C++/Python3) não serão explorados com tanto detalhe como os específicos de C++.
 
 ---
 
@@ -77,107 +77,190 @@ int main() {
 
 ---
 
-# Exercícios
+# MyCalculator.cpp
 
-**E1.** A função `main` é o ponto de entrada do programa. Comprova a afirmação, copiando o código [neste ficheiro](https://raw.githubusercontent.com/NIAEFEUP/Workshop_CPP/master/introdutory%20exercises/explainMain.cpp) e correndo-o no onlinegdb.
-
-**SC1.** Começa o desenvolvimento do programa MyShoppingCart por adicionar uma mensagem de boas-vindas ao utilizador. Para isso, copia o código [neste ficheiro](https://raw.githubusercontent.com/NIAEFEUP/Workshop_CPP/master/shopping-cart/MyShoppingCart.cpp) e cola-o no onlinegdb. Trabalharás com este ficheiro até ao final do workshop!
-
-Exemplo do programa em execução:
-![sc1](https://i.imgur.com/dBVjJKl.png)
+- Vamos desenvolver uma aplicação de cálculo aritmético simples.
+- O desenvolvimento será feito por etapas, introduzindo aos poucos a maneira de funcionamento e conceitos da linguagem.
 
 ---
 
-# Solução
+# Ex1 - Boas vindas
 
+- Começemos por dar as boas vindas ao nosso utilizador.
+- Pegando no exemplo do Hello World, altera a mensagem que é mostrada ao utilizador para uma que lhe dê as boas-vindas à calculadora. Por exemplo:
 
-```cpp
+    ```bash
+    Welcome to MyCalculator!
+    App developed by António Bezerra.
+    ```
+
+---
+
+# Ex1 - Boas vindas
+
+## Solução
+
+```C++
 int main() {
-    // ...
-     
-    vector<double> prices;
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
 
-    cout << "Bem-vindo ao MyShoppingCart!" << endl;
+    return 0;
+}
+```
+
+---
+
+# Output
+
+- Para mostrar informação na consola é utilizando o stream `cout`.
+- Este objeto imprime aquilo que lhe fornecemos com o operador de inserção `<<`.
+- Para mudar de linha no final de uma inserção, utiliza-se a função `endl`. A mudança de linha não é feita automaticamente.
+```C++
+cout << "Linha 1 ";
+cout << "Linha 1" << endl;
+cout << "Linha 2 "<< endl;
+cout << "Linha 3";
+```
+
+    ```bash
+    Linha 1 Linha 1
+    Linha 2
+    Linha 3
+    ```
+
+---
+
+# Output
+
+- É possível encadear várias inserções numa mesma instrução.
+```C++
+cout << "Este texto foi inserido em: " << endl;
+cout << "2 linhas" << endl;
+cout << "Este texto foi inserido em: " << endl << "1 linha";
+```
+
+    ```bash
+    Este texto foi inserido em: 
+    2 linhas
+    Este texto foi inserido em: 
+    1 linha
+    ```
+
+---
+
+# Ex2 - Input
+
+Vamos ler um número inteiro inserido pelo utilizador na consola e guardá-lo numa variável. A nossa aplicação deve:
+- Pedir input ao utilizador:
+```bash
+Please insert an integer number: 
+```
+- Instanciar a varáivel onde vamos guardar a input:
+```C++
+int input;
+```
+- Ler input utilizando o stream `cin`:
+```C++
+cin >> input;
+```
+- Mostrar a input recebida:
+```C++
+cout << "Your input: " << input << endl;
+```
+
+---
+
+## Solução 
+
+```C++
+int main() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
+
+    cout << "Please input an integer number: ";
     
-    // ...
+    int input;
+    cin >> input;
+
+    cout << "Your input: " << input << endl;
+
+    return 0;
 }
+```
+
+---
+
+# Variáveis e tipos de dados
+
+- C++ é ***strongly typed*** - o tipo das variáveis e valores de retorno das funções tem que ser declarado explicitamente.
+- Há dois tipos de variáveis:
+    - Globais: Declaradas fora do corpo de uma função, podem ser utilizadas em qualquer função.
+    - Locais: Declaradas dentro do corpo de uma função, apenas podem ser utilizadas na própria função.
+- A declaração de uma variável tem a seguinte estrutura:
+```C++
+int num;
+char letter = 'A'; 
+// Neste caso, para além de declarar a variável,
+// estamos também a inicializá-la com um valor
 ```
 
 ---
 
 # Tipos de dados
-- char - caracteres alfanuméricos (ex: 'c', '8', '$');
-- int - números inteiros (ex: 103, -2)
-- float - números com vírgula flutuante de precisão simples (ex: 1.902, -5,926563840)
-- double - números com vírgula flutuante de precisão dupla (ex: 1.2, -4.587)  
-- bool - verdadeiro ou falso (ex: true, false)
-- void - significa "sem qualquer valor". É usado quando uma função não retorna nenhum 
-valor
+
+As variáveis de C++ podem ser dos seguintes tipos:
+
+- **char** - caracteres alfanuméricos ('c', '8', '$', ...)
+- **int** - números inteiros (103, -2, ...)
+- **float** - números em vírgula flutuante de precisão simples (1.902, -5,926563840, ...)
+- **double** - números em vírgula flutuante de precisão dupla (1.2, -4.587, ...)  
+- **bool** - valor booleano (true, false)
+
+Existem bibliotecas que acrescentam outros tipos de dados, como ***strings*** ou ***vectors***, que veremos mais à frente.
 
 ---
 
-# Tipos de dados
-## Modificadores de tipos de dados
-- signed/unsigned - para números com/sem sinal
-- short - valor otimizado para o espaço com comprimento de pelo menos 16 bits
-- long/long long - valor otimizado para precisão com comprimento de pelo menos 32/64 bits
+# Input
 
+- Para obter informação da consola é utilizando o stream `cin`.
+- Este objeto extraí a informação obtida para a variável que é fornecida ao operador de extração `>>`.
+- O programa para a execução enquanto espera pela input do utilizador.
+- Por defeito, a extração acontece quando o utilizador prime *enter*.
+- Se o stream estiver vazio, a extração não acontece e o programa continua à espera.
+- Se o stream contiver dados incompatíveis com o tipo de variável, os dados não são extraídos mas a execução continua.
+
+---
+
+# Input
+
+- É possível encadear duas extrações:
 ```C++
-
 int main() {
-    unsigned int i = 5;
-    int y = 3; // Quando omisso o modificador, é assumido que o valor é signed
-    long float z = 9;
-    long long double d = 37.2387193;
-    char x = 'r';
-    int i = 0;
-    float y = 1.3;
-    double z = 4.586
-    bool b = true;
+    int num;
+    char letter;
+
+    cin >> num >> letter;
+
+    cout << "INPUT: " << endl;
+    cout << "num: " << num << endl;
+    cout << "letter: " << letter << endl;
 
     return 0;
 }
 ```
----
-# Variáveis
-São contentores capazes de armazenar valores de um determinado tipo
 
-## Como as declarar?
-```C++
-int myNumber = 15;
-bool myBoolean = true;
-```
-## Tipos de variáveis
-- Globais - declarar fora de qualquer função
-- Locais - declarar dentro de uma função específica (ex. main)
-
-### NOTAS:
-- Podem existir variáveis locais com o mesmo nome e diferentes valores ao mesmo tempo, 
-desde que sejam locais e estejam dentro de funções diferentes cada uma 
-- Não têm que ser inicializadas ao mesmo tempo que são declaradas
+    ```bash
+    11 # input
+    a # input
+    INPUT:
+    num: 11
+    letter: a
+    ```
 
 ---
 
-# Constantes
-Semelhantes a variáveis, mas o seu conteúdo não pode ser alterado após a sua inicialização. 
-Podem ser locais ou globais.
 
-```C++
-#include <iostream>
-
-using namespace std;
-
-int main() {
-    int variable;
-    const char constant = 'T';
-
-    variable = 5;
-    constant = 3; // IMPOSSÍVEL: seria gerado um erro durante a compilação!
-    cout << variable << " " << constant << endl;
-
-    return 0;
-}
-```
 
 ---
 
