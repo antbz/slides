@@ -317,13 +317,13 @@ int main() {
 # Operadores
 
 ## Operadores Aritméticos
-- **+** - adição
-- **-** - subtração
-- **\*** - multiplicação
-- **/** - divisão*
-- **%** - módulo (resto da divisão inteira)
+- `+` - adição
+- `-` - subtração
+- `\` - multiplicação
+- `/` - divisão*
+- `%` - módulo (resto da divisão inteira)
 
-\* Nota: O tipo retornado pela divisão depende do tipo dos operandos. Se ambos forem do tipo inteiro, a divisão terá um resultado inteiro também:
+\* **Nota:** O tipo retornado pela divisão depende do tipo dos operandos. Se ambos forem do tipo inteiro, a divisão terá um resultado inteiro também:
 ```C++
 int a = 3;
 int b = a / 2; // = 1
@@ -335,219 +335,105 @@ int c = a / 2.0 // = 1.5
 # Operadores
 
 ## Operadores de igualdade
-- **==** - verdadeiro se ambos os operandos forem iguais
-- **!=** - verdadeiro se ambos os operandos forem diferentes
-- **>** - verdadeiro se operando da esquerda for maior que o da direita
-- **<** - verdadeiro se operando da esquerda for menor que o da direita
-- **>=** - verdadeiro se operando da esquerda for maior ou igual que o da direita
-- **<=** - verdadeiro se operando da esquerda for menor ou igual que o da direita
+- `==` - igual a
+- `!=` - diferente de
+- `>` - maior do que
+- `<` - menor do que
+- `>=` - maior ou igual
+- `<=` - menor ou igual
 
 ## Operadores lógicos
-- **&&** - E lógico
-- **||** - OU lógico 
-- **!** - NÃO lógico (negação)
+- `&&` - E lógico
+- `||` - OU lógico 
+- `!` - NÃO lógico (negação)
 
 ---
 
 # Operadores
-## Alguns operadores de atribuição
-- **=** - operando da esquerda fica com o valor do da direita
-- **+=** - operando da esquerda fica com o valor do da direita somado com o seu próprio valor
-- **-=** - operando da esquerda fica com o valor do da direita subtraído com o seu próprio valor
-- ***=** - operando da esquerda fica com o valor do da direita multiplicado com o seu próprio valor
-- **/=** - operando da esquerda fica com o valor do da direita dividido com o seu próprio valor
-- **++** - incremento de 1 unidade
-- **--** - decremento de 1 unidade
+
+## Operadores de atribuição
+- `a = b` - a fica com o valor de b
+- `a += b` - `a = a + b`
+- `a -= b` - `a = a - b`
+- `a *= b` - `a = a * b`
+- `a /= b` - `a = a / b`
+- `a++` - `a = a + 1`
+- `a--` - `a = a - 1`
 
 ---
 
+# Ex4 - Outras operações
 
-# Operadores
-## IO - Output
-De maneira a ser possível enviar informação para o utilizador, é comum imprimir 
-mensagens no ecrã do computador. Para isso, e como foi possível ver no slide 
-anterior, utiliza-se o objeto **cout** seguido do operador **<<** para 
-transmitir informação para o ecrã do utilizador.
+Usando os operandos já vistos e introduzindo cláusulas *if*, vamos adicionar à nossa calculadora a capacidade de realizar qualquer uma das quatro operações aritméticas fundamentais.
 
+- Acrescentar uma variável `char op` para armazenar um caratér lido da consola, que deverá ser um de: +, -, *, /.
+- Utilizando o operador de igualdade `==` e uma cláusula *if*, realizar a operação correta.
+- Uma cláusula *if* tem a seguinte estrutura:
 ```C++
-cout << "Bom dia " << nome_do_aluno << "!" << endl;
-cout << "Tudo bem contigo?" << endl;
-```
-
---- 
-
-```Bash
-// Assuma-se que o conteúdo da variável nome_do_aluno é Inês.
-Bom dia Inês!
-Tudo bem?
-```
-
-NOTA: A partícula **endl** permite mover o cursor para a linha seguinte, entre diferentes 
-utilizações do objeto **cout**. Caso não estivesse presente, o resultado seria o 
-seguinte:
-```Bash
-Bom dia Inês!Tudo bem?
-```
-
----
-# Operadores
-### Input 
-De maneira similar, é possível transmitir informações do utilizador para o programa.
-Para isso usa-se a stream **cin** e o operador **>>**. Após o operador, coloca-se 
-a variável aonde vai ser guardada a informação.
-
---- 
-
-A stream **cin** permite obter informação de qualquer tipo de dados (exceto tipos 
-definidos pelo utilizador, a não ser que o operador >> tenha sido overloaded).
-
-Note-se que também existe a função getline(), que permite obter informação apenas 
-sob a forma de strings. A vantagem relativamente ao **cin** é que esta função permite 
-receber strings com o caracter espaço ' ' (a string *acaba* apenas quando o caracter '\n' 
-é encontrado). Por outro lado, o **cin** utiliza qualquer espaço em branco como 
-delimitador (o que inclui espaços, newlines, tabs, etc.).
-
----
-# Operadores
-```C++
-#include <iostream>
-  
-using namespace std;
-    
-// Um mau uso da stream cin
-
-int main() {
-    string name;
-    cout << "Insert your name here: ";
-    cin >> name;
-    cout << "Your name is " << name << endl;
-    
-    return 0;
-}     
-```
-
---- 
-
-```Bash
-Insert your name here: Rui Alves
-Your name is Rui
-```
-
---- 
-
-Repare-se que o nome inserido difere do recebido pelo programa!
-Mais à frente veremos o porquê de isto acontecer, e perceberemos melhor o 
-funcionamento da stream **cin**.
-
----
-
-# Exercícios
-
-
-**E2.** Vamos agora tentar perceber como fazer operações aritméticas. Está atento ao quadro e, se quiseres, reproduz no teu onlinegdb!
-
-**E3.** Vamos experimentar com variáveis. Copia o código [neste ficheiro](https://raw.githubusercontent.com/NIAEFEUP/Workshop_CPP/master/introdutory%20exercises/IOops.cpp) e corre o programa. Completa-o, de forma a também perguntar a idade e imprimi-la de seguida.
-
-**SC2.** Melhora a mensagem de boas vindas de forma a pedir o nome do utilizador e cumprimentá-lo. Atenção aos nomes que contêm espaços. Por exemplo, se o utilizador responder com “Pedro Fernandes”, o programa deve responder “Olá Pedro Fernandes!” e não “Olá Pedro!”.
-
-Exemplo do programa em execução:
-![sc2](https://i.imgur.com/GRj1w07.png)
-
----
-
-# Solução
-
-
-```cpp
-int main() {
-    // ...
-    vector<double> prices;
-    string name;
-
-    cout << "Bem-vindo ao MyShoppingCart!" << endl;
-    cout << "Qual é o teu nome? ";
-    getline(cin, name);
-    cout << "Olá " << name << "!" << endl;
-    
-    // ...
+if (cond) {
+    // CÓDIGO A EXECUTAR SE cond FOR VERDADE
+} else if (cond2) {
+    // CÓDIGO A EXECUTAR SE cond FOR FALSO E cond2 VERDADE
+} else {
+    // CÓDIGO A EXECUTAR SE TANTO cond COMO cond2 FOREM FALSO
 }
 ```
 
 ---
 
-# Condições
-## Declarações *If*
-```C++
-if (price < 0)
-    return -1;
-else if (price == 0)
-    return 0;
-else
-    return 1;
-```
+# Ex4 - Outras operações
+
+## Solução
 
 ```C++
-if (cond_variable == true)    // equivalente a if (cond_variable)
-    return 0;
-```
+int ex4() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
 
-```C++
-if (smart && !lazy)
-    return true;
-```
+    cout << "Please input an integer number: ";
+    int num1;
+    cin >> num1;
 
----
-# Condições
-## Declarações *Switch-Case*
-Ideail para substituírem declarações *if* muito longas que 
-comparam uma variável com vários **valores inteiros** 
-```C++
-switch (choice) {
-    case 1: 
-        cout << "First item selected!" << endl;
-        break;
-    case 2:
-        cout << "Second item selected!" << endl;
-        break;
-    default:
-        cout << "Invalid selection :(" << endl;
-        break;
-}
-```
-Na ausência do *break*, as outras condições *case* serão executadas 
-
----
-
-# Exercícios
-
-**E4.** Vamos tentar perceber o funcionamento de programas com `if`. Copia o código [neste ficheiro](https://raw.githubusercontent.com/NIAEFEUP/Workshop_CPP/master/introdutory%20exercises/ControlFlow.cpp) e corre-o no onlinegdb.
-
-**SC3.** Descomenta (removendo as barras) a linha com o conteúdo `printAndChooseOption(option, listItems, prices);`. Se correres o programa, reparas que aparece uma lista das opções disponíveis, e é pedido ao utilizador para escolher uma delas. Melhora o programa de forma a que, quando o utilizador coloca uma opção não existente (ex: -1), seja imprimida uma mensagem a assinalar o erro.
-
-Exemplo do programa em execução:
-
-![sc3](https://i.imgur.com/Yo9oOsI.png)
-
----
-
-# Solução
-
-
-```cpp
-void printAndChooseOption(int &option, vector<string> &cartItems, vector<double> &prices) {
-    // ...
+    cout << "Please input an operator (+, -, *, /): ";
+    char op;
+    cin >> op;
     
-    switch (option)
-    {
-        // ...
-        default:
-           cout << "Opção não existente!" << endl;
-           break;
+    cout << "Please input an integer number: ";
+    int num2;
+    cin >> num2;
+
+    // ...
+```
+
+---
+
+# Ex4 - Outras operações
+
+## Solução
+
+```C++
+    // ...
+    int result;
+
+    if (op == '+') {
+        result = num1 + num2;
+    } else if (op == '-') {
+        result = num1 - num2;
+    } else if (op == '*') {
+        result = num1 * num2;
+    } else if (op == '/') {
+        result = num1 / num2;
     }
-    
-    // ...
+
+    cout << "Result: " << result << endl;
+
+    return 0;
 }
 ```
+
+---
+
+
 
 ---
 
