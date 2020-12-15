@@ -13,9 +13,17 @@ class: center, middle
 
 ---
 
+# Pré-requisitos
+
+Este workshop dá como adquiridos alguns conceitos mais elementares de programação. Mais concretamente, foi concebido para programadores que têm como base conhecimento de Python 3.
+
+Assim sendo, os detalhes que são comuns às duas linguagens (C++/Python3) não serão explorados com tanto detalhe como os específicos de C++.
+
+---
+
 # Overview
 
-1. O que é o C++?
+1. [Uma breve história de C++](#4)?
 2. Hello world!
 3. Tipos de dados
 4. Variáveis
@@ -29,21 +37,20 @@ class: center, middle
 
 ---
 
-# O que é o C++?
-- Criado por Bjarne Stroustrup
-- Extensão da linguagem C - 99% retrocompatível
-- Disponível em praticamente todos os computadores
-- Suporta programação orientada a objetos
-- Usada para definir precisamente uma sequência de operações que o computador tem 
-que executar para realizar uma determinada tarefa
-- Extremamente eficiente (quando bem utilizada...)
-- Versátil e muito poderosa, mas exige responsabilidade (memory leaks, dangling pointers...)
+# Uma breve história de C++
+- Linguagem criada por Bjarne Stroustrup em 1979
+- É uma extensão de C
+- Compatível com programação orientada a objetos
+- Amplamente suportada e muito poderosa
 
 ![Bjarne Stroustrup](img/bjarne.jpg)
 
 ---
 
 # Hello world!
+
+Para começar, abre o [OnlineGDB](https://www.onlinegdb.com/online_c++_compiler), copia e cola o seguinte código e executa-o.
+
 ```C++
 // helloworld.cpp
 #include <iostream>
@@ -55,6 +62,18 @@ int main() {
     return 0;
 }
 ```
+
+---
+# Hello world!
+
+## Breakdown
+
+- `#include <iostream>` - Inclui o ficheiro `iostream` que contém os objetos de **input/output**.
+- `using namespace std;` - Necessário para utilizar diretamente as funções da **biblioteca padrão**. O conceito de namespace sai fora do alcance deste workshop.
+- `int main()` - Define a **função de entrada** do programa. `int` determina que o valor **retornado** por esta função é um inteiro.
+- `cout` - Stream de **output** para a consola
+- `<<` - Operador de **inserção**, insere os dados que o seguem no stream que o antecede.
+- `endl` - Insere um caratér de **fim de linha** `\n`
 
 ---
 
