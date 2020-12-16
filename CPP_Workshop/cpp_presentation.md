@@ -765,266 +765,477 @@ int ex7() {
 
 ---
 
-# Vetores
-- Estrutura de dados linear com a capacidade de armazenar vários valores de um
-determinado tipo. Pode alterar o seu tamanho automaticamente sempre que um elemento 
-novo é inserido ou apagado
-- São alocados contíguamente na memória, podendo por isso ser acessados através de iteradores
-- Os dados são sempre inseridos no final do vetor
+# Strings
 
-## Notas importantes
-- Os índices de um vetor iniciam-se sempre no zero. Ou seja, o primeiro elemento de um vetor 
-está na posição 0, o segundo elemento na posição 1, etc.
-- é possível consultar o conteúdo de um vetor numa determinada posição utilizando parêntesis 
-retos [] ou o método .at(); 
+Em C++, `string` é um tipo de variável utilizado para armazenar texto.
 
----
+Para utilizar strings no nosso programa, é necessário incluir a biblioteca de strings:
 ```C++
-#include <iostream>
-#include <vector>
-    
-using namespace std;
-    
-int main() {
-    vector<int> numbers {10, 20, 30}; // inicialização do vetor com 3 elementos
-    int size;
-
-    numbers.push_back(40); // adição do valor 40 ao fim do vetor
-    numbers.pop_back(); // remove o último valor do vetor (40)
-
-    size = numbers.size();
-    
-    cout << "Vector size = " << size << endl;
-    cout << "Vector elements:";
-    for (unsigned int i = 0; i != numbers.size(); i++)
-        cout << " " << numbers.at(i); // equivalente a numbers[i]
-    cout << endl;
-    
-    numbers.erase(numbers.begin() + 1); // elimina o segundo elemento do vetor
-    // EVITAR FAZER O SEGUINTE:
-    // Nas próximas linhas de código, estamos a repetir código de maneira a 
-    // podermos voltar a imprimir o tamanho e conteúdo do vetor!
-    cout << "Vector size = " << size << endl;
-    cout << "Vector elements:";
-    for (unsigned int i = 0; i != numbers.size(); i++)
-        cout << " " << numbers.at(i);
-    cout << endl;
-
-    return 0;
-}                                                                         
-```
----
-
-```Bash
-Vector size = 3
-Vector elements: 10 20 30
-Vector size = 3
-Vector elements: 10 30
-```
-
---- 
-
-Atente-se no uso da função erase() para eliminar um elemento de um vetor:
-```C++
-numbers.erase(numbers.begin() + 1);
-```
-A função elimina o elemento que se encontrar na posição que estiver a 1 unidade 
-do início do vetor (numbers.begin()). Sendo que o primeiro elemento é o número 
-10, e que este se encontra na posição 0, a posição a elminar será a que estiver 
-à distância 0 + 1 = 1 do início do vetor, ou seja, o elemento 20.
-
---- 
-
-É também de realçar a repetição do código de impressão do tamanho e conteúdo do vetor!
-```C++
-cout << "Vector size = " << size << endl;
-cout << "Vector elements:";
-for (unsigned int i = 0; i != numbers.size(); i++)
-    cout << " " << numbers.at(i); // equivalente a numbers[i]
-cout << endl;
-```
-
-Haverá alguma maneira de evitar esta situação?
-
----
-
-# Streams 
-As streams de IO do C++ providenciam uma maneira incrívelmente flexível, mas ao mesmo tempo
-simples, de conceber as rotinas de input/output de qualquer aplicação.
-
-A informação pode ser vista como cadeias (streams) de caracteres. Isto faz sentido porque 
-qualquer coisa que escrevamos no teclado pode apenas ser um caracter. Suponha-se que o utilizador 
-insere o número 7479 - como é possível saber que foi inserido um número? O problema é que na verdade, 
-não se sabe ao certo. Tudo o que se tem é o conjunto de caracteres '7', '4', '7' e '9'. Cabe ao 
-programador decidir se quer que a string inserida seja um número, uma string, etc. Se os caracteres 
-são válidos para o tipo que o programador deseja que sejam? Depende se o tipo de dados consegue interpretar 
-os caracteres da input stream como uma descrição de um objeto desse tipo.
-
-Para além de enviar informação para o ecrã (**cout**), as streams podem também direcionar os dados para 
-ficheiros, o que permite, por exemplo, gravar o progresso de um jogo.
-
----
-
-# Streams
-```C++
-// Reads numbers from a file and finds the maximum value
-#include <iostream>
 #include <string>
-#include <fstream> 
 
-using namespace std;
-
-double max_value(ifstream &in) {
-    double highest, next;
-    if (in >> next) // if file contains at least 1 element
-        highest = next;
-    else return 0;
-    while (in >> next)
-      if (next > highest)
-        highest = next;
-    return highest;
-}
+string texto = "Isto é um texto";
 ```
 
-Note-se a inclusão das bibliotecas string e fstream! 
+Strings são sempre delimitadas por `"`. Caratéres sempre por `'`.
 
-Uma **ifstream** é um objeto da classe de input stream usado para operar em 
-ficheiros. Uma **ofstream** trabalha, analogamente, com output.
-
----
-```C++
-int main() {
-    string filename;
-    cout << "Please enter the data file name: ";
-    cin >> filename;
-
-    ifstream infile;
-    infile.open(filename);
-
-    if (infile.fail()) { // or if(!infile.is_open()) or if (!infile)
-        cerr << "Error opening " << filename << "\n";
-        return 1;
-    }
-
-    double max = max_value(infile);
-    cout << "The maximum value is " << max << "\n";
-
-    infile.close();
-    return 0;
-}
-```
---- 
-
-Conteúdo do ficheiro aux.txt:
-```Bash
-1 5 4 2 3
-```
-
---- 
-
-```Bash
-Please enter the data file name: aux.txt
-The maximum value is 5
-```
-
----
+Ao contrário dos tipos básicos, strings são objetos e possuem métodos *built-in*. Existem também funções para converter de e para strings;
 
 ```C++
-/**
-  * OUTPUT TO FILE
-  * Writes a simple string into a file
-  */
-#include <iostream>
-#include <fstream>
-using namespace std;
+texto.size(); // = 15 - tamanho da string
+texto.find("um") // = 7 - primeiro índice em que aparece a sequência "um"
+int i = stoi("123") // Converte uma string para um valor inteiro
+string str = to_string(6+36) // Converte um valor numérico para uma string
+```
+
+[Referência da biblioteca](http://www.cplusplus.com/reference/string/)
+
+---
+
+# Ex8 - Strings
+
+Para já a nossa aplicação utiliza apenas tipos básicos de C++. No entanto, podemos torná-la mais resistente a erros do utilizador se utilizarmos strings para tratar do input, em conjunção com `getline()`. 
+- Substitui a função `getOperator()` por `getWithMessage(string message)`, que retorna uma string de input do utilizador, mostrando anteriormente a mensagem `message`.
+- Substitui a função `getNum()` por `to_num(string str)` que converte o parâmetro `str` num número. Deve conseguir converter as strings "m" e "mem" para o último resultado.
+- Usando estas novas funções, adapta o código do loop para que o utilizador possa sair do programa em qualquer fase da inserção de dados/operador.
+
+Uso de `getline`:
+```C++
+string dest;
+getline(cin, dest);
+```
+
+---
+
+# Ex8 - Strings
+
+### Solução
+
+```C++
+double last_result = 0; // Agora é global
+
+void printGreeting() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
+    cout << "Operators: + - * /" << endl;
+    cout << "Accessing last result: m or mem" << endl;
+    cout << "Exiting: x or exit" << endl;
+    cout << "---------------------------------" << endl;
+}
+
+string getWithMessage(string message) {
+    string op;
+    cout << message;
+    getline(cin, op);
+    return op;
+}
+
+double to_num(string str) {
+    if (str == "m" || str == "mem") {
+        cout << "mem: " << last_result << endl;
+        return last_result;
+    }
+    return stod(str);
+}
+```
+
+---
+
+# Ex8 - Strings
+
+### Solução
+
+```C++
+double calculateResult(double num1, double num2, string op) {
+    double result;
+    if (op == "+") {
+        result = num1 + num2;
+    } else if (op == "-") {
+        result = num1 - num2;
+    } else if (op == "*") {
+        result = num1 * num2;
+    } else if (op == "/") {
+        if (num2 == 0) {
+            cout << "Invalid operation!" << endl;
+            return -1;
+        }
+        result = num1 / num2;
+    }
+    return result;
+}
+```
+
+---
+
+# Ex8 - Strings
+
+### Solução
+
+```C++
+int main() {
+    printGreeting();
+
+    while (true) {
+        string aux = getWithMessage("Input first number: ");
+        if (aux == "x" || aux == "exit") {
+            break;
+        } 
+        double num1 = to_num(aux);
+
+        aux = getWithMessage("Input operator: ");
+        if (aux == "x" || aux == "exit") {
+            break;
+        }
+        string op = aux;
+        
+        aux = getWithMessage("Input second number: ");
+        if (aux == "x" || aux == "exit") {
+            break;
+        } 
+        double num2 = to_num(aux);
+
+        // ... O resto mantém-se
+```
+
+---
+
+# STL - Standard Template Library
+
+A Standard Template Library (STL) é um conjunto de classes que implementam algumas estruturas de dados e algoritmos mais comuns, entre outras funcionalidades.
+
+Estas classes são chamadas *template* pois podem ser utilizadas com variáveis de qualquer tipo. No entanto, o tipo tem sempre que ser declarado.
+
+As estrutras de dados mais comuns implementadas na STL são:
+
+- `vector<T>` - guarda dados sequencialmente, fácil de iterar.
+- `set<T>` - não admite duplicados, acesso rápido aos elementos.
+- `map<T>` - semelhante a um dicionário, guarda pares chave-valor, não admite chaves duplicadas.
+
+À exceção dos `array`, todas as estruturas de dados da STL têm tamanho dinâmico.
+
+---
+
+# Vetores
+
+- São semelhantes a listas de Python.
+- A inserção de dados é feita por defeito no final do vetor.
+- O acesso aos dados numa determinada posição pode ser feito com `[]`.
+
+### Exemplo
+
+```C++
+#include <vector>
+
+vector<int> vec1 = {1, 2, 3, 4};
+vector<string> vec2;
+vec2.push_back("Um");
+vec2.push_back("Dois");
+vec2.push_back("Três");
+
+vec1[0]; // = 1
+vec2[2]; // = Três
+
+vec1.size(); // = 4
+vec2.size(); // = 3
+
+vec1[2] = 4;
+```
+
+[Referência da biblioteca](http://www.cplusplus.com/reference/vector/vector/)
+
+---
+
+# Ex9 - Histórico
+
+Vamos adicionar um histórico de resultados à nossa calculadora. O histórico pode ser consultado utilizando "m-N", em que N é o número de posições a retroceder. Se N for omitido, assume-se que se pretende o último resultado. Se N ultrapassar o tamanho do histórico, assume-se que se pretende o primeiro resultado.
+- Substitui a variável que armazena o último resultado por um vetor.
+- Cria uma nova função `getFromMem(string pos)` que consiga aceder à posição do histórico conforme especificado no enunciado.
+- Procede aos ajustes necessários no resto do código.
+
+**Tips:** 
+- Podes utilizar o método `.size()` para conhecer o tamanho de um vetor.
+- Podes utilizar o método `.substr(i)` para obter uma substring de uma string, começando na posição i.
+
+---
+
+# Ex9 - Histórico
+
+### Solução
+
+```C++
+vector<double> result_history;
+
+void printGreeting() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
+    cout << "Operators: + - * /" << endl;
+    cout << "Accessing N-th previous result: m-N" << endl;
+    cout << "Exiting: x or exit" << endl;
+    cout << "---------------------------------" << endl;
+}
+
+double getFromMem(string pos) {
+    if (pos.size() == 1 && !pos.empty()) {
+        return result_history.back();
+    } else if (pos[1] == '-') {
+        int shift = stoi(pos.substr(2));
+        if (shift < result_history.size()) {
+            return result_history[result_history.size() - 1 - shift];
+        }
+        return result_history[0];
+    } else {
+        return 0;
+    }
+}
+```
+
+---
+
+# Ex9 - Histórico
+
+### Solução
+
+```C++
+double to_num(string str) {
+    if (str[0] == 'm') {
+        double mem = getFromMem(str);
+        cout << "mem: " << getFromMem(str) << endl;
+        return mem;
+    }
+    return stod(str);
+}
 
 int main() {
-    ofstream outfile;
-    outfile.open("example.txt");
+    //...
+        double result = calculateResult(num1, num2, op);
+        cout << "Result: " << result << endl;
+        result_history.push_back(result);
+    // ...
+}
+```
+---
 
-    outfile << "Writing this very difficult computation into a file" << endl;
+# Classes
 
-    outfile.close();
+C++ acrescenta a C o suporte para programação orientada a objetos (POO).
+
+Um objeto é uma entidade que pode conter dados e métodos para os manipular, garantido que apenas as funções do objeto podem aceder diretamente aos dados.
+
+As classes são um tipo de dados definido pelo utilizador que representam objetos.
+- Podem conter métodos (funções) ou atributos (variáveis) públicos (acedíveis em qualquer parte do código) ou privados (acedíveis apenas na própria classe).
+- O construtor de uma classe cria um novo objeto do seu tipo de acordo com os parâmetros que recebe.
+- É possível implementar relações entre classes, por exemplo, de herança. No entanto, não abordaremos estes aspetos no workshop.
+
+---
+
+# Classes
+
+### Exemplo
+
+```C++
+class Foo {
+private:
+    int dataPriv1;
+    string dataPriv2;
+
+    void metodoPriv();
+public:
+    Foo(int data);
+    int getData1();
+    void setData1(int data);
+    void metodoPub();
+};
+```
+
+---
+
+# Classes
+
+### Exemplo
+
+```C++
+void Foo::metodoPriv() {
+    // Código que implementa o método
+}
+
+int Foo::getData1() {
+    return dataPriv1;
+}
+
+void Foo::setData1(int data) {
+    dataPriv1 = data;
+}
+
+Foo::Foo(int data) {
+    dataPriv1 = data;
+}
+```
+
+---
+
+# Ex10 - Classes
+
+Vamos transformar a nossa calculadora numa classe. O benefício principal da mudança para a classe será garantir que os dados do histórico, por exemplo, só são manipuláveis no contexto da calculadora.
+- Cria a classe MyCalculator que contém
+    - Um método público `void run()` que executa o ciclo principal do programa.
+    - Os métodos criados nos exercícios anteriores como privados.
+    - Um vetor com o histórico de resultados também privado.
+- **Extra:** cria um novo atributo `stop` para evitar a repetição de código que faz a verificação da string de saída.
+
+---
+
+# Ex10 - Classes
+
+### Solução
+
+```C++
+class MyCalculator {
+private:
+    vector<double> result_history;
+    bool stop = false;
+
+    void printGreeting();
+    string getWithMessage(string message);
+    double getFromMem(string pos);
+    double to_num(string str);
+    double calculateResult(double num1, double num2, string op);
+public:
+    void run();
+};
+```
+
+---
+
+# Ex10 - Classes
+
+### Solução
+
+```C++
+void MyCalculator::printGreeting() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
+    cout << "Operators: + - * /" << endl;
+    cout << "Accessing N-th previous result: m-N" << endl;
+    cout << "Exiting: x or exit" << endl;
+    cout << "---------------------------------" << endl;
+}
+
+string MyCalculator::getWithMessage(string message) {
+    string op;
+    cout << message;
+    getline(cin, op);
+    stop = (op == "x" || op == "exit");
+    return op;
+}
+```
+
+---
+
+# Ex10 - Classes
+
+### Solução
+
+```C++
+double MyCalculator::getFromMem(string pos) {
+    if (pos.size() == 1 && !pos.empty()) {
+        return result_history.back();
+    } else if (pos[1] == '-') {
+        int shift = stoi(pos.substr(2));
+        if (shift < result_history.size()) {
+            return result_history[result_history.size() - 1 - shift];
+        }
+        return result_history[0];
+    } else {
+        return 0;
+    }
+}
+
+double MyCalculator::to_num(string str) {
+    if (str[0] == 'm') {
+        double mem = getFromMem(str);
+        cout << "mem: " << getFromMem(str) << endl;
+        return mem;
+    }
+    return stod(str);
+}
+```
+
+---
+
+# Ex10 - Classes
+
+### Solução
+
+```C++
+double MyCalculator::calculateResult(double num1, double num2, string op) {
+    double result;
+    if (op == "+") {
+        result = num1 + num2;
+    } else if (op == "-") {
+        result = num1 - num2;
+    } else if (op == "*") {
+        result = num1 * num2;
+    } else if (op == "/") {
+        if (num2 == 0) {
+            cout << "Invalid operation!" << endl;
+            return -1;
+        }
+        result = num1 / num2;
+    }
+    return result;
+}
+```
+
+---
+
+# Ex10 - Classes
+
+### Solução
+
+```C++
+void MyCalculator::run() {
+    printGreeting();
+
+    while (true) {
+        string aux = getWithMessage("Input first number: ");
+        if (stop) {
+            break;
+        } 
+        double num1 = to_num(aux);
+        aux = getWithMessage("Input operator: ");
+        if (stop) {
+            break;
+        }
+        string op = aux;
+        aux = getWithMessage("Input second number: ");
+        if (stop) {
+            break;
+        } 
+        double num2 = to_num(aux);
+
+        double result = calculateResult(num1, num2, op);
+        cout << "Result: " << result << endl;
+        result_history.push_back(result);
+    }
+}
+```
+
+---
+
+# Ex10 - Classes
+
+### Solução
+
+```C++
+int main() {
+    MyCalculator calc;
+
+    calc.run();
 
     return 0;
 }
 ```
---- 
-
-Conteúdo do ficheiro example.txt: 
-```Bash
-Writing this very difficult computation into a file
-```
 
 ---
-
-# Exercícios
-
-**SC12.** Neste momento, os itens no carrinho perdem-se quando o programa é terminado. Corrige este problema, começando primeiro por escrever os produtos num ficheiro de texto (.txt), linha a linha, no formato “&lt;NOME&gt; &lt;PREÇO&gt;”:
-
-Exemplo de um ficheiro de texto seguindo este formato:
-![sc12](https://i.imgur.com/LtUSpZ6.png)
-
-**SC13.** A funcionalidade anterior é inútil se o programa não fizer uso do ficheiro criado. Complementa-a com a leitura do mesmo ficheiro, inicializando os respetivos vetores no início do programa. Verifica que a função está correta correndo a opção “Ver itens”.
-
----
-
-# Soluções
-
-
-```cpp
-void writeItems(vector<string> cartItems, vector<double> prices) {
-    ofstream out("shoppingcart.txt");
-
-    for (int i = 0; i < cartItems.size(); i++)
-    {
-        out << cartItems.at(i) << " " << prices.at(i) << endl;
-    }
-}
-
-int main() {
-    // ...
-
-    writeItems(cartItems, prices);
-
-    return 0;
-}
-```
-
----
-
-# Soluções
-
-
-```cpp
-void readItems(vector<string> &cartItems, vector<double> &prices) {
-    ifstream in("shoppingcart.txt");
-    string cartItem;
-    double price;
-
-    while (in >> cartItem >> price)
-    {
-        cartItems.push_back(cartItem);
-        prices.push_back(price);
-    }
-}
-
-int main() {
-    // ...
-    
-    cout << "Olá " << name << "!" << endl;
-
-    readItems(cartItems, prices);
-
-    while (option != 0)
-        printAndChooseOption(option, cartItems, prices);
-
-    // ...
-}
-```
-
----
-
 # Recursos Recomendados
 
 ## Ferramenta de Desenvolvimento
@@ -1041,3 +1252,9 @@ int main() {
 
 - The C++ Programming Language, 4ª Edição, de Bjarne Stroustrup
 - Effective C++, 3ª Edição, de Scott Meyers
+
+---
+
+# The End
+
+![Congratulations](https://i.imgur.com/qeGOBbl.jpeg)
