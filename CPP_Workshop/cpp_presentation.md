@@ -349,7 +349,7 @@ int main() {
 ## Operadores Aritméticos
 - `+` - adição
 - `-` - subtração
-- `\` - multiplicação
+- `\*` - multiplicação
 - `/` - divisão*
 - `%` - módulo (resto da divisão inteira)
 
