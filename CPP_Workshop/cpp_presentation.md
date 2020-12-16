@@ -77,6 +77,24 @@ int main() {
 
 ---
 
+# Hello world!
+
+## Diferenças chave: C++ vs Python.
+
+### A identação não importa (tanto)
+
+Serve apenas para organizar melhor o código, mas não afeta o significado/execução do programa.
+
+### Ponto; e; vírgula;
+
+Cada comando/linha de código tem de ser terminado por `;`.
+
+### Liguagem compilada vs. interpretada
+
+É mais rápida, mas menos flexível.
+
+---
+
 # MyCalculator.cpp
 
 - Vamos desenvolver uma aplicação de cálculo aritmético simples.
@@ -98,7 +116,7 @@ int main() {
 
 # Ex1 - Boas vindas
 
-## Solução
+### Solução
 
 ```C++
 int main() {
@@ -173,7 +191,7 @@ cout << "Your input: " << input << endl;
 
 # Ex2 - Input
 
-## Solução 
+### Solução 
 
 ```C++
 int main() {
@@ -289,7 +307,7 @@ int sum = num1 + num2;
 
 # Ex3 - Soma
 
-## Solução
+### Solução
 
 ```C++
 int main() {
@@ -383,20 +401,20 @@ if (cond) {
 
 # Ex4 - Outras operações
 
-## Solução
+### Solução
 
 ```C++
 int ex4() {
     cout << "Welcome to MyCalculator!" << endl;
     cout << "App developed by António Bezerra." << endl;
 
-    cout << "Please input an integer number: ";
-    int num1;
-    cin >> num1;
-
     cout << "Please input an operator (+, -, *, /): ";
     char op;
     cin >> op;
+
+    cout << "Please input an integer number: ";
+    int num1;
+    cin >> num1;
     
     cout << "Please input an integer number: ";
     int num2;
@@ -409,7 +427,7 @@ int ex4() {
 
 # Ex4 - Outras operações
 
-## Solução
+### Solução
 
 ```C++
     // ...
@@ -422,6 +440,10 @@ int ex4() {
     } else if (op == '*') {
         result = num1 * num2;
     } else if (op == '/') {
+        if (num2 == 0) {
+            cout << "Invalid operation!" << endl;
+            return -1;
+        }
         result = num1 / num2;
     }
 
@@ -433,78 +455,310 @@ int ex4() {
 
 ---
 
+# Ex5 - Repetir operações
 
+Vamos adaptar a aplicação para não terminar no final de realizar uma operação.
 
----
-
-# Ciclos
-## While loop 
+- Envolver o código atual com um ciclo `while` infinito.
+- Usar `break;` para terminar o ciclo quando o utilizador insere um caratér 'x'.
 ```C++
-while (x < 5)
-    cout << x << " is less than 5" << endl;
-```
-
-## Do-while loop
-```C++
-do {
-    cout << x << " is less than 5" << endl;
-}
-while (x < 5);
-```
----
-# Ciclos
-## For loop
-```C++
-for (unsigned int i = 0; i < 10; i++) {
-    int y = i*2;
-    cout << y << endl;
+while (true) {
+    // ...
+    break; // Termina o ciclo
 }
 ```
 
-É possível encadear ciclos. Útil para percorrer elementos de matrizes, por exemplo
+---
+
+# Ex5 - Repetir operações
+
+### Solução
 
 ```C++
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
 int main() {
-    for (unsigned int i = 0; i < 5; i++) {
-        for (unsigned int j = 0; j < 5; j++) {
-            cout << "Linha " << i << " Coluna " << j << endl;
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
+    
+    while (true) {
+        cout << "Please input an operator (+, -, *, /) - x to quit: ";
+        char op;
+        cin >> op;
+
+        if (op == 'x') {
+            break;
         }
+
+        cout << "Please input an integer number: ";
+        int num1;
+        cin >> num1;
+        
+        cout << "Please input an integer number: ";
+        int num2;
+        cin >> num2;
+
+    // ...
+```
+
+---
+
+# Ex5 - Repetir operações
+
+### Solução
+
+```C++
+    // ...
+        int result;
+
+        if (op == '+') {
+            result = num1 + num2;
+        } else if (op == '-') {
+            result = num1 - num2;
+        } else if (op == '*') {
+            result = num1 * num2;
+        } else if (op == '/') {
+            if (num2 == 0) {
+                cout << "Invalid operation!" << endl;
+                return -1;
+            }
+            result = num1 / num2;
+        }
+
+        cout << "Result: " << result << endl;
     }
+
     return 0;
 }
 ```
 
 ---
 
-# Exercícios
+# Ciclos
+## While loop 
+```C++
+while (cond) {
+    // Corre enquanto cond for verdade
+}
+```
 
-**E5.** De forma a perceber melhor como ciclos funcionam, copia o código [neste ficheiro](https://raw.githubusercontent.com/NIAEFEUP/Workshop_CPP/master/introdutory%20exercises/Looping.cpp) e coloca-o no onlinegdb.
+## Do-while loop
+```C++
+do {
+    // Corre sempre pelo menos uma vez
+    // Corre mais vezes enquanto cond for verdade
+}
+while (cond); 
+```
 
-**SC4.** Melhora o programa de forma a que seja possível continuar a fazer operações enquanto o utilizador assim quiser. Ou seja, como na lista de opções, a opção 0 é a responsável por terminar o programa, este deve continuar enquanto essa opção não for escolhida.
-Exemplo do programa em execução:
-
-Primeiro Input             |  Segundo Input
-:-------------------------:|:-------------------------:
-![](https://i.imgur.com/tsuIpln.png)  |  ![](https://i.imgur.com/jNhPLPR.png)
+## For loop
+```C++
+for (int i = 0; i < 10; i++) {
+    // Corre enquanto i for menor do que 10, incrementando por 1 a cada iteração
+}
+```
 
 ---
 
-# Solução
+# Variáveis e ciclos
 
-```cpp
-int main() {
-    // ...
+- Em C++, chavetas `{ }` representam um *scope* ou âmbito.
+- *Scopes* delimitam os locais onde determinadas variáveis podem ser referenciadas.
+- Tal como variáveis locais só são acedíveis dentro da função onde são declaradas, variáveis declaradas dentro de um ciclo ou cláusula *if* delimitados por `{ }` só podem ser utilizadas no ciclo/cláusula.
+- A cada iteração, as variáveis declaradas no corpo do ciclo são re-inicializadas.
+- A variáveis declarada no cabeçalho de um ciclo `for` pertence ao *scope* do ciclo, mas é inicializada apenas uma vez.
+
+### Exemplo
+```C++
+int a = 1;
+if (cond) {
+    int i = 1;
+    cout << a + i; // Imprime: 2
+}
+cout << i; // Inválido!
+```
+
+---
+
+# Ex6 - Calculadora com memória
+
+Vamos acrescentar a funcionalidade de utilizar o valor do último resultado da calculadora como operando. Assim, podemos encadear as operações!
+- Criar uma variável que armazene o último resultado.
+- Quando o utilizador insere como operador o caratér 'm', utilizar o resultado anterior como o primeiro operando e pedir novamente o operador.
+- Ter em atenção o local de declaração da variável e o local de atualização do respetivo valor.
+
+---
+
+# Ex6 - Calculadora com memória
+
+### Solução 
+
+```C++
+int ex6() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
     
-    cout << "Olá " << name << "!" << endl;
+    double last_result = 0;
 
-    while (option != 0)
-        printAndChooseOption(option, cartItems, prices);
+    while (true) {
+        cout << "Input an operator (+, -, *, /) - m to use last result - x to quit: ";
+        char op;
+        cin >> op;
 
+        int num1;
+
+        if (op == 'x') {
+            break;
+        } else if (op == 'm') {
+            num1 = last_result;
+            cout << "Please input an operator (+, -, *, /): ";
+            cin >> op;
+        } else {
+            cout << "Please input an integer number: ";
+            cin >> num1;
+        }
+```
+
+---
+
+# Ex6 - Calculadora com memória
+
+### Solução 
+
+```C++
+        cout << "Please input an integer number: ";
+        int num2;
+        cin >> num2;
+
+        int result;
+
+        if (op == '+') {
+            result = num1 + num2;
+        } else if (op == '-') {
+            result = num1 - num2;
+        } else if (op == '*') {
+            result = num1 * num2;
+        } else if (op == '/') {
+            if (num2 == 0) {
+                cout << "Invalid operation!" << endl;
+                return -1;
+            }
+            result = num1 / num2;
+        }
+        cout << "Result: " << result << endl;
+        last_result = result;
+    }
+
+    return 0;
+}
+```
+---
+
+# Funções
+
+À medida que vamos expandindo a nossa aplicação, a nossa função `main` começa a ficar um pouco grande. Começa a aparecer código repetido e a ser difícil compreender imediatamente o que certas secções do código fazem.
+
+Para resolver este problema, podemos dividir o código em várias funções.
+
+Assim, o nosso código torna-se mais fácil de compreender e modular, sendo possível reutilizá-lo facilmente.
+
+Declaração de função em C++:
+```C++
+int foo(int num, char a) {
+    // ...
+}
+```
+
+Para além dos tipos de variáveis, as funções podem não retornar nada, tendo o tipo `void`.
+
+---
+
+# Ex7 - Organizar
+
+Vamos manter as funcionalidades da nossa calculadora, mas melhorar a organização do código.
+- Criar funções para as principais funcionalidades do programa:
+    - `void printGreeting()`
+    - `char getOperator()`
+    - `double getNum()`
+    - `double calculateResult()`
+
+---
+
+# Ex7 - Organizar
+
+### Solução
+
+```C++
+void printGreeting() {
+    cout << "Welcome to MyCalculator!" << endl;
+    cout << "App developed by António Bezerra." << endl;
+}
+
+char getOperator() {
+    cout << "Input an operator (+, -, *, /) - m to use last result - x to quit: ";
+    char op;
+    cin >> op;
+    return op;
+}
+
+double getNum() {
+    double num;
+    cout << "Please input a number: ";
+    cin >> num;
+    return num;
+}
+```
+
+---
+
+# Ex7 - Organizar
+
+### Solução
+
+```C++
+double calculateResult(double num1, double num2, char op) {
+    double result;
+    if (op == '+') {
+        result = num1 + num2;
+    } else if (op == '-') {
+        result = num1 - num2;
+    } else if (op == '*') {
+        result = num1 * num2;
+    } else if (op == '/') {
+        if (num2 == 0) {
+            cout << "Invalid operation!" << endl;
+            return -1;
+        }
+        result = num1 / num2;
+    }
+    return result;
+}
+```
+
+---
+
+# Ex7 - Organizar
+
+### Solução
+
+```C++
+int ex7() {
+    printGreeting();
+    double last_result = 0;
+    while (true) {
+        char op = getOperator();
+        double num1;
+        if (op == 'x') {
+            break;
+        } else if (op == 'm') {
+            num1 = last_result;
+            op = getOperator();
+        } else {
+            num1 = getNum();
+        }
+        double num2 = getNum();
+        double result = calculateResult(num1, num2, op);
+        cout << "Result: " << result << endl;
+        last_result = result;
+    }
     return 0;
 }
 ```
