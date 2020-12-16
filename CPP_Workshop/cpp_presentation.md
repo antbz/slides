@@ -5,14 +5,6 @@ class: center, middle
 
 ---
 
-# Links importantes
-
-- Apresentação: https://niaefeup-workshop-cpp.netlify.com/
-- [Exercícios](https://github.com/NIAEFEUP/Workshop_CPP/)
-- [OnlineGDB](https://www.onlinegdb.com/online_c++_compiler)
-
----
-
 # Pré-requisitos
 
 Este workshop dá como adquiridos alguns conceitos mais elementares de programação. Foi concebido para programadores que têm como base conhecimento de Python 3.
@@ -21,27 +13,36 @@ Os detalhes que são comuns às duas linguagens (C++/Python3) não serão explor
 
 ---
 
+# Links importantes
+
+- Apresentação: https://niaefeup-workshop-cpp.netlify.com/
+- [Exercícios](https://github.com/NIAEFEUP/Workshop_CPP/)
+- [OnlineGDB](https://www.onlinegdb.com/online_c++_compiler)
+
+---
+
 # Overview
 
-1. [Uma breve história de C++](#4)?
-2. Hello world!
-3. Tipos de dados
-4. Variáveis
-5. Constantes
-6. Operadores
-7. Condições
-8. Ciclos
-9. Vetores
-10. Funções
-11. Streams
+1. [Uma breve história de C++](#5)
+2. [Hello world!](#6)
+3. [Output](#10)
+4. [Variáveis e tipos de dados](#16)
+5. [Input](#14)
+6. [Operadores](#21)
+7. [Condições](#26)
+8. [Ciclos](#29)
+9. [Funções](#37)
+10. [Strings](#42)
+11. [STL/Vetores](#47)
+12. [Classes](#52)
 
 ---
 
 # Uma breve história de C++
-- Linguagem criada por Bjarne Stroustrup em 1979
-- É uma extensão de C
-- Compatível com programação orientada a objetos
-- Amplamente suportada e muito poderosa
+- Linguagem criada por Bjarne Stroustrup em 1979.
+- É uma extensão de C.
+- Compatível com programação orientada a objetos.
+- Amplamente suportada e muito poderosa.
 
 ![Bjarne Stroustrup](img/bjarne.jpg)
 
@@ -52,7 +53,6 @@ Os detalhes que são comuns às duas linguagens (C++/Python3) não serão explor
 Para começar, abre o [OnlineGDB](https://www.onlinegdb.com/online_c++_compiler), copia e cola o seguinte código e executa-o.
 
 ```C++
-// helloworld.cpp
 #include <iostream>
 
 using namespace std;
@@ -68,12 +68,12 @@ int main() {
 
 ## Breakdown
 
-- `#include <iostream>` - Inclui o ficheiro `iostream` que contém os objetos de **input/output**.
+- `#include <iostream>` - Inclui/"importa" o ficheiro `iostream` que contém os objetos de **input/output**.
 - `using namespace std;` - Necessário para utilizar diretamente as funções da **biblioteca padrão**. O conceito de namespace sai fora do alcance deste workshop.
-- `int main()` - Define a **função de entrada** do programa. `int` determina que o valor **retornado** por esta função é um inteiro.
-- `cout` - Stream de **output** para a consola
-- `<<` - Operador de **inserção**, insere os dados que o seguem no stream que o antecede.
-- `endl` - Insere um caratér de **fim de linha** `\n`
+- `int main()` - Define a **função de entrada** do programa. Esta função **retorna sempre um inteiro** (`int`).
+- `cout` - Stream de **output** para a consola.
+- `<<` - Operador de **inserção**: insere os dados que o seguem no stream que o antecede.
+- `endl` - Insere um caráter de **fim de linha** `\n`.
 
 ---
 
@@ -95,16 +95,23 @@ Cada comando/linha de código tem de ser terminado por `;`.
 
 ---
 
-# MyCalculator.cpp
+# Calculadora
 
-- Vamos desenvolver uma aplicação de cálculo aritmético simples.
-- O desenvolvimento será feito por etapas, introduzindo aos poucos a maneira de funcionamento e conceitos da linguagem.
+Vamos desenvolver uma aplicação de cálculo aritmético simples.
+
+O desenvolvimento será feito por etapas, introduzindo aos poucos novos conceitos da linguagem.
+
+Cada etapa tem um enunciado com algumas sugestões que servem como guia.
+
+A seguir ao enunciado de cada etapa, é apresentada uma proposta de resolução, que será analisada.
+
+Entre as várias etapas, serão explicados com maior detalhe os conceitos abordados.
 
 ---
 
 # Ex1 - Boas vindas
 
-- Começemos por dar as boas vindas ao nosso utilizador.
+Começemos por dar as boas vindas ao nosso utilizador.
 - Pegando no exemplo do Hello World, altera a mensagem que é mostrada ao utilizador para uma que lhe dê as boas-vindas à calculadora. Por exemplo:
 
     ```bash
@@ -131,15 +138,16 @@ int main() {
 
 # Output
 
-- Para mostrar informação na consola é utilizando o stream `cout`.
-- Este objeto imprime aquilo que lhe fornecemos com o operador de inserção `<<`.
-- Para mudar de linha no final de uma inserção, utiliza-se a função `endl`. A mudança de linha não é feita automaticamente.
-```C++
-cout << "Linha 1 ";
-cout << "Linha 1" << endl;
-cout << "Linha 2 "<< endl;
-cout << "Linha 3";
-```
+- Para mostrar informação na consola é utilizado o stream `cout`.
+- Para mudar de linha no final de uma inserção, utiliza-se a função `endl`. 
+- Este objeto imprime aquilo que lhe fornecemos com o operador de inserção `<<`. 
+
+    ```C++
+    cout << "Linha 1 ";
+    cout << "Linha 1" << endl;
+    cout << "Linha 2 "<< endl;
+    cout << "Linha 3";
+    ```
 
     ```bash
     Linha 1 Linha 1
@@ -172,9 +180,9 @@ cout << "Este texto foi inserido em: " << endl << "1 linha";
 Vamos ler um número inteiro inserido pelo utilizador na consola e guardá-lo numa variável. A nossa aplicação deve:
 - Pedir input ao utilizador:
 ```bash
-Please insert an integer number: 
+Input an integer number: 
 ```
-- Instanciar a varáivel onde vamos guardar a input:
+- Instanciar a varáivel onde vamos guardar o valor introduzir:
 ```C++
 int input;
 ```
@@ -213,17 +221,24 @@ int main() {
 
 # Variáveis e tipos de dados
 
-- C++ é ***strongly typed*** - o tipo das variáveis e valores de retorno das funções tem que ser declarado explicitamente.
-- Há dois tipos de variáveis:
-    - Globais: Declaradas fora do corpo de uma função, podem ser utilizadas em qualquer função.
-    - Locais: Declaradas dentro do corpo de uma função, apenas podem ser utilizadas na própria função.
+- C++ é uma **linguagem estática** - o tipo das variáveis e valores de retorno das funções tem que ser declarado explicitamente.
+- Não é necessário atribuir um valor a uma variável antes de a utilizar.
+- Há dois **tipos de variáveis**:
+    - **Globais**: Declaradas fora do corpo de uma função, podem ser utilizadas em qualquer função.
+    - **Locais**: Declaradas dentro do corpo de uma função, apenas podem ser utilizadas na própria função.
 - A declaração de uma variável tem a seguinte estrutura:
-```C++
-int num;
-char letter = 'A'; 
-// Neste caso, para além de declarar a variável,
-// estamos também a inicializá-la com um valor
-```
+
+    ```C++
+    int num;
+    // ...
+    num = 1;
+    ```
+    
+    ```C++
+    char letter = 'A'; 
+    // Neste caso, para além de declarar a variável,
+    // estamos também a inicializá-la com um valor
+    ```
 
 ---
 
@@ -234,7 +249,7 @@ As variáveis de C++ podem ser dos seguintes tipos:
 - **char** - caracteres alfanuméricos ('c', '8', '$', ...)
 - **int** - números inteiros (103, -2, ...)
 - **float** - números em vírgula flutuante de precisão simples (1.902, -5,926563840, ...)
-- **double** - números em vírgula flutuante de precisão dupla (1.2, -4.587, ...)  
+- **double** - números em vírgula flutuante de precisão dupla (1.902, -5,926563840, ...)  
 - **bool** - valor booleano (true, false)
 
 Existem bibliotecas que acrescentam outros tipos de dados, como ***strings*** ou ***vectors***, que veremos mais à frente.
@@ -243,12 +258,12 @@ Existem bibliotecas que acrescentam outros tipos de dados, como ***strings*** ou
 
 # Input
 
-- Para obter informação da consola é utilizando o stream `cin`.
+- Para obter informação da consola é utilizado o stream `cin`.
 - Este objeto extraí a informação obtida para a variável que é fornecida ao operador de extração `>>`.
-- O programa para a execução enquanto espera pela input do utilizador.
-- Por defeito, a extração acontece quando o stream contém um caratér de espaço branco (newline, espaço, tab, etc).
-- Se o stream estiver vazio, a extração não acontece e o programa continua à espera.
-- Se o stream contiver dados incompatíveis com o tipo de variável, os dados não são extraídos mas a execução continua.
+- O programa **para a execução** enquanto espera pela input do utilizador.
+- Por defeito, a extração acontece quando o stream contém um **caráter de espaço branco **(newline, espaço, tab, etc).
+- Se o stream estiver **vazio**, a extração não acontece e o programa continua à espera.
+- Se o stream contiver **dados incompatíveis** com o tipo de variável, os dados não são extraídos mas a execução continua.
 
 ---
 
@@ -284,10 +299,10 @@ int main() {
 
 Para além do stream `cin` é também comum utilizar a função `getline()`.
 - `getline()` obtém uma linha como uma string.
-- Ao contrário de `cin`, o delimitador de extração é apenas o caratér de newline, e não qualquer espaço branco.
+- Ao contrário de `cin`, o delimitador de extração é apenas o caráter de newline, e não qualquer espaço branco.
 - Assim, é possível extrair informação que contenha espaços, por exemplo.
 - É importante ***não misturar*** a utilização dos dois métodos.
-    - Ao obter informação diretamente de `cin`, o caratér de delimitação não é retirado do stream.
+    - Ao obter informação diretamente de `cin`, o caráter de delimitação não é retirado do stream.
     - Assim, se o delimitador fosse um '\n', ao utilizar `getline()` obteríamos uma string vazia.
 
 Veremos casos de utilzação desta função mais à frente.
@@ -297,11 +312,8 @@ Veremos casos de utilzação desta função mais à frente.
 # Ex3 - Soma
 
 Vamos acrescentar a funcionalidade de somar dois números à nossa aplicação. Tendo por base o código do último exercício:
-- Declarar mais uma variável e pedir input ao utilizador novamente para obter o seu valor.
-- Ao invés de no final mostrar na consola as inputs, somar o valor das duas variáveis e mostrar:
-```C++
-int sum = num1 + num2;
-```
+- Declara mais uma variável e pede input ao utilizador novamente para obter o seu valor.
+- Ao invés de no final mostrar na consola as inputs, soma o valor das duas variáveis e mostra o resultado.
 
 ---
 
@@ -384,9 +396,9 @@ int c = a / 2.0 // = 1.5
 
 Usando os operandos já vistos e introduzindo cláusulas *if*, vamos adicionar à nossa calculadora a capacidade de realizar qualquer uma das quatro operações aritméticas fundamentais.
 
-- Acrescentar uma variável `char op` para armazenar um caratér lido da consola, que deverá ser um de: +, -, *, /.
+- Acrescentar uma variável `char op` para armazenar um caráter lido da consola, que deverá ser um de: +, -, *, /.
 - Utilizando o operador de igualdade `==` e uma cláusula *if*, realizar a operação correta.
-- Uma cláusula *if* tem a seguinte estrutura:
+- Em C++, uma cláusula *if* tem a seguinte estrutura:
 ```C++
 if (cond) {
     // CÓDIGO A EXECUTAR SE cond FOR VERDADE
@@ -396,6 +408,7 @@ if (cond) {
     // CÓDIGO A EXECUTAR SE TANTO cond COMO cond2 FOREM FALSO
 }
 ```
+- **Sugestão:** para tornar a nossa calculadora mais versátil, muda o tipo de dados dos números da calculadora para `double`.
 
 ---
 
@@ -404,7 +417,7 @@ if (cond) {
 ### Solução
 
 ```C++
-int ex4() {
+int main() {
     cout << "Welcome to MyCalculator!" << endl;
     cout << "App developed by António Bezerra." << endl;
 
@@ -412,12 +425,12 @@ int ex4() {
     char op;
     cin >> op;
 
-    cout << "Please input an integer number: ";
-    int num1;
+    cout << "Please input a number: ";
+    double num1;
     cin >> num1;
     
-    cout << "Please input an integer number: ";
-    int num2;
+    cout << "Please input a number: ";
+    double num2;
     cin >> num2;
 
     // ...
@@ -431,7 +444,7 @@ int ex4() {
 
 ```C++
     // ...
-    int result;
+    double result;
 
     if (op == '+') {
         result = num1 + num2;
@@ -442,7 +455,7 @@ int ex4() {
     } else if (op == '/') {
         if (num2 == 0) {
             cout << "Invalid operation!" << endl;
-            return -1;
+            return -1; // Atenção à divisão por zero!
         }
         result = num1 / num2;
     }
@@ -458,9 +471,8 @@ int ex4() {
 # Ex5 - Repetir operações
 
 Vamos adaptar a aplicação para não terminar no final de realizar uma operação.
-
-- Envolver o código atual com um ciclo `while` infinito.
-- Usar `break;` para terminar o ciclo quando o utilizador insere um caratér 'x'.
+- Envolve o código atual num ciclo `while (true)` - ciclo infinito.
+- Usa `break;` para terminar o ciclo quando o utilizador inserir um caráter 'x' como operador.
 ```C++
 while (true) {
     // ...
@@ -489,11 +501,11 @@ int main() {
         }
 
         cout << "Please input an integer number: ";
-        int num1;
+        double num1;
         cin >> num1;
         
         cout << "Please input an integer number: ";
-        int num2;
+        double num2;
         cin >> num2;
 
     // ...
@@ -507,7 +519,7 @@ int main() {
 
 ```C++
     // ...
-        int result;
+        double result;
 
         if (op == '+') {
             result = num1 + num2;
@@ -533,6 +545,7 @@ int main() {
 ---
 
 # Ciclos
+
 ## While loop 
 ```C++
 while (cond) {
@@ -564,7 +577,7 @@ for (int i = 0; i < 10; i++) {
 - *Scopes* delimitam os locais onde determinadas variáveis podem ser referenciadas.
 - Tal como variáveis locais só são acedíveis dentro da função onde são declaradas, variáveis declaradas dentro de um ciclo ou cláusula *if* delimitados por `{ }` só podem ser utilizadas no ciclo/cláusula.
 - A cada iteração, as variáveis declaradas no corpo do ciclo são re-inicializadas.
-- A variáveis declarada no cabeçalho de um ciclo `for` pertence ao *scope* do ciclo, mas é inicializada apenas uma vez.
+- A variável declarada no cabeçalho de um ciclo `for` pertence ao *scope* do ciclo, mas é inicializada apenas uma vez, antes do ciclo iniciar.
 
 ### Exemplo
 ```C++
@@ -581,9 +594,9 @@ cout << i; // Inválido!
 # Ex6 - Calculadora com memória
 
 Vamos acrescentar a funcionalidade de utilizar o valor do último resultado da calculadora como operando. Assim, podemos encadear as operações!
-- Criar uma variável que armazene o último resultado.
-- Quando o utilizador insere como operador o caratér 'm', utilizar o resultado anterior como o primeiro operando e pedir novamente o operador.
-- Ter em atenção o local de declaração da variável e o local de atualização do respetivo valor.
+- Cria uma variável que armazene o último resultado.
+- Quando o utilizador inserir como operador o caráter 'm', utiliza o resultado anterior como o primeiro operando e pede novamente o operador.
+- Tem em atenção o local de declaração da variável e o local de atualização do respetivo valor.
 
 ---
 
@@ -656,25 +669,27 @@ int ex6() {
 
 À medida que vamos expandindo a nossa aplicação, a nossa função `main` começa a ficar um pouco grande. Começa a aparecer código repetido e a ser difícil compreender imediatamente o que certas secções do código fazem.
 
-Para resolver este problema, podemos dividir o código em várias funções.
+Para resolver este problema, podemos dividir o código em várias **funções**.
 
 Assim, o nosso código torna-se mais fácil de compreender e modular, sendo possível reutilizá-lo facilmente.
 
-Declaração de função em C++:
+Declaração de uma função em C++:
 ```C++
 int foo(int num, char a) {
     // ...
 }
 ```
 
-Para além dos tipos de variáveis, as funções podem não retornar nada, tendo o tipo `void`.
+Para além dos vários tipos de dados, as funções podem não retornar nada, tendo o tipo `void`.
+
+As funções têm que ser declaradas por ordem. Se uma função `a()` utiliza outra função `f()`, a declaração de `f()` tem que anteceder a de `a()`.
 
 ---
 
 # Ex7 - Organizar
 
 Vamos manter as funcionalidades da nossa calculadora, mas melhorar a organização do código.
-- Criar funções para as principais funcionalidades do programa:
+- Cria funções para as principais funcionalidades do programa:
     - `void printGreeting()`
     - `char getOperator()`
     - `double getNum()`
@@ -776,7 +791,7 @@ Para utilizar strings no nosso programa, é necessário incluir a biblioteca de 
 string texto = "Isto é um texto";
 ```
 
-Strings são sempre delimitadas por `"`. Caratéres sempre por `'`.
+Strings são sempre delimitadas por `"`. Carateres sempre por `'`.
 
 Ao contrário dos tipos básicos, strings são objetos e possuem métodos *built-in*. Existem também funções para converter de e para strings;
 
@@ -795,8 +810,8 @@ string str = to_string(6+36) // Converte um valor numérico para uma string
 
 Para já a nossa aplicação utiliza apenas tipos básicos de C++. No entanto, podemos torná-la mais resistente a erros do utilizador se utilizarmos strings para tratar do input, em conjunção com `getline()`. 
 - Substitui a função `getOperator()` por `getWithMessage(string message)`, que retorna uma string de input do utilizador, mostrando anteriormente a mensagem `message`.
-- Substitui a função `getNum()` por `to_num(string str)` que converte o parâmetro `str` num número. Deve conseguir converter as strings "m" e "mem" para o último resultado.
-- Usando estas novas funções, adapta o código do loop para que o utilizador possa sair do programa em qualquer fase da inserção de dados/operador.
+- Substitui a função `getNum()` por `to_num(string str)` que converte o parâmetro `str` num número. Deve conseguir converter as string "m" para o último resultado. Neste caso, imprime este valor.
+- Usando estas novas funções, adapta o código do loop para que o utilizador possa sair do programa em qualquer fase da inserção de dados/operador. Permite também sair do loop escrevendo "exit".
 
 Uso de `getline`:
 ```C++
@@ -817,7 +832,7 @@ void printGreeting() {
     cout << "Welcome to MyCalculator!" << endl;
     cout << "App developed by António Bezerra." << endl;
     cout << "Operators: + - * /" << endl;
-    cout << "Accessing last result: m or mem" << endl;
+    cout << "Accessing last result: m" << endl;
     cout << "Exiting: x or exit" << endl;
     cout << "---------------------------------" << endl;
 }
@@ -830,7 +845,7 @@ string getWithMessage(string message) {
 }
 
 double to_num(string str) {
-    if (str == "m" || str == "mem") {
+    if (str == "m") {
         cout << "mem: " << last_result << endl;
         return last_result;
     }
@@ -910,6 +925,8 @@ As estrutras de dados mais comuns implementadas na STL são:
 - `set<T>` - não admite duplicados, acesso rápido aos elementos.
 - `map<T>` - semelhante a um dicionário, guarda pares chave-valor, não admite chaves duplicadas.
 
+`T` representa o tipo dos dados armazenados na estrutura.
+
 À exceção dos `array`, todas as estruturas de dados da STL têm tamanho dinâmico.
 
 ---
@@ -951,8 +968,7 @@ Vamos adicionar um histórico de resultados à nossa calculadora. O histórico p
 - Cria uma nova função `getFromMem(string pos)` que consiga aceder à posição do histórico conforme especificado no enunciado.
 - Procede aos ajustes necessários no resto do código.
 
-**Tips:** 
-- Podes utilizar o método `.size()` para conhecer o tamanho de um vetor.
+**Tip:** 
 - Podes utilizar o método `.substr(i)` para obter uma substring de uma string, começando na posição i.
 
 ---
@@ -1020,7 +1036,7 @@ C++ acrescenta a C o suporte para programação orientada a objetos (POO).
 
 Um objeto é uma entidade que pode conter dados e métodos para os manipular, garantido que apenas as funções do objeto podem aceder diretamente aos dados.
 
-As classes são um tipo de dados definido pelo utilizador que representam objetos.
+As **classes** são um tipo de dados definido pelo utilizador que representam objetos.
 - Podem conter métodos (funções) ou atributos (variáveis) públicos (acedíveis em qualquer parte do código) ou privados (acedíveis apenas na própria classe).
 - O construtor de uma classe cria um novo objeto do seu tipo de acordo com os parâmetros que recebe.
 - É possível implementar relações entre classes, por exemplo, de herança. No entanto, não abordaremos estes aspetos no workshop.
@@ -1072,10 +1088,29 @@ Foo::Foo(int data) {
 
 ---
 
+# Classes
+
+### Exemplo
+
+```C++
+int main() {
+    Foo foo1(10);
+
+    foo1.getData1(); // = 10
+    foo1.setData1(2);
+    foo1.getData1(); // = 2
+
+    foo1.metodoPub(); // OK
+    foo1.metodoPriv(); // Inválido
+}
+```
+
+---
+
 # Ex10 - Classes
 
 Vamos transformar a nossa calculadora numa classe. O benefício principal da mudança para a classe será garantir que os dados do histórico, por exemplo, só são manipuláveis no contexto da calculadora.
-- Cria a classe MyCalculator que contém
+- Cria a classe MyCalculator que contém:
     - Um método público `void run()` que executa o ciclo principal do programa.
     - Os métodos criados nos exercícios anteriores como privados.
     - Um vetor com o histórico de resultados também privado.
