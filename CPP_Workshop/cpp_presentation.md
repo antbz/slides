@@ -15,8 +15,8 @@ Os detalhes que são comuns às duas linguagens (C++/Python3) não serão explor
 
 # Links importantes
 
-- Apresentação: https://niaefeup-workshop-cpp.netlify.com/
-- [Exercícios](https://github.com/NIAEFEUP/Workshop_CPP/)
+- Apresentação: https://cpp-ws-2020.netlify.app/
+- [Exercícios](https://github.com/antbz/WS_Cpp)
 - [OnlineGDB](https://www.onlinegdb.com/online_c++_compiler)
 
 ---
@@ -357,7 +357,7 @@ int main() {
 ```C++
 int a = 3;
 int b = a / 2; // = 1
-int c = a / 2.0 // = 1.5
+double c = a / 2.0 // = 1.5
 ```
 
 ---
