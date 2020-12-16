@@ -693,7 +693,7 @@ Vamos manter as funcionalidades da nossa calculadora, mas melhorar a organiza√ß√
     - `void printGreeting()`
     - `char getOperator()`
     - `double getNum()`
-    - `double calculateResult()`
+    - `double calculateResult(double num1, double num2, char op)`
 
 ---
 
